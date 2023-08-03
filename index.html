@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fetch data from api</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Skapa två button för att skicka och visa data-->
+        <button class="send-button" onclick="fetchData()">Send data</button>
+        <button class="draw-button" onclick="window.location.href='diagram.php';">Draw diagram</button>
+    </div>
+    <div id="message-container"></div>
+
+    <script>
+        //Hämta data från api
+        function fetchData() {
+            fetch('https://randomuser.me/api/?results=50&inc=location,dob,gender')
+                .then(response => response.json())
+                .then(data => {
+                    const formattedData = data.results.map(user => ({
+                        country: user.location.country,
+                        age: user.dob.age,
+                        gender: user.gender
+                    }));
+
+                    // Skicka data till PHP för att göra insert operation till databasen
+                    fetch('insert_data.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formattedData)
+                    })
+                    .then(response => response.text())
+                    .then(message => {
+                        const messageContainer = document.getElementById("message-container");
+                        messageContainer.innerHTML = message;
+                    })
+                    .catch(error => console.error('Error:', error));
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

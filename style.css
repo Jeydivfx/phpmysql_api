@@ -1,0 +1,58 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+}
+
+button {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.send-button {
+  background-color: #4CAF50;
+}
+
+.draw-button {
+  background-color: #3498DB;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Lägg 1rem space mellan de två button som vi har */
+button + button,
+
+#message-container {
+  margin-left: 1rem;
+}
+
+#message-container {
+  margin-top: 1rem;
+  color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 400px;
+  width: 100%;
+}
